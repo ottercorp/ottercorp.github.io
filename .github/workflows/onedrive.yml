@@ -1,0 +1,25 @@
+name: Upload integrity Files
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout cn
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Upload Integrity
+        uses: Loskh/onedrive-action@master
+        with:
+          folder: integrity
+          upload_path: /downloads/XLFiles/
+          redirect_uri: "https://file.ffxiv.wang/"
+          client_id: ${{ secrets.CLIENT_ID }}
+          client_secret: ${{ secrets.CLIENT_SECRET }}
+          refresh_token: ${{ secrets.REFRESH_TOKEN }}
